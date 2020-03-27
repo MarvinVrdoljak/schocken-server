@@ -47,11 +47,14 @@ const server = http.createServer(app);
 
 const io = socketIo(server); // < Interesting!
 
+var dice = [1,2,3];
+
 io.on("connection", socket => {
   console.log("New client connected"), setInterval(
       () => getApiAndEmit(socket),
       1000
   );
+  socket.emit("dice", dice);
   socket.on("disconnect", () => console.log("Client disconnected"));
 });
 
