@@ -50,23 +50,13 @@ const io = socketIo(server); // < Interesting!
 var dice = [1,2,3];
 
 io.on("connection", socket => {
-  console.log("New client connected"), setInterval(
-      () => getApiAndEmit(socket),
-      1000
-  );
-  socket.emit("dice", dice);
+  socket.on("roll", data => {
+    console.log("Rooooooolled");
+    io.emit("roll", data);
+  });
   socket.on("disconnect", () => console.log("Client disconnected"));
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
-
-const getApiAndEmit = async socket => {
-  try {
-    const res = "TEstTEst"
-    socket.emit("FromAPI", res); // Emitting a new message. It will be consumed by the client
-  } catch (error) {
-    console.error(`Error: ${error.code}`);
-  }
-};
 
 module.exports = app;
