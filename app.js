@@ -24,7 +24,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
@@ -49,10 +52,6 @@ const io = socketIo(server); // < Interesting!
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Handle React routing, return all requests to React app
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
 
 io.on("connection", socket => {
   socket.on("roll", data => {
