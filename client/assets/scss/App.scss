@@ -1,0 +1,85 @@
+@import 'settings';
+
+@import 'core/colors';
+@import 'core/breakpoints';
+@import 'core/functions';
+@import 'core/base';
+
+@import 'imports/buttons';
+@import 'imports/form';
+
+@import 'imports/dices';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body{
+    font-family: Arial;
+  }
+
+  a{
+    color: #333;
+    text-decoration: none;
+  }
+
+  .header{
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .board{
+      background-position: center center;
+      min-height: 100vh;
+      padding: rem-calc(20);
+      background-size: cover;
+  }
+
+  .player{
+    margin-bottom: rem-calc(15);
+    position: relative;
+    background-color: rgba($white, 0.5);
+    border-radius: 5px;
+    padding: rem-calc(15 20 20);
+    border: 1px solid rgba($black, 0.25);
+
+    &__meta{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      &__button{
+        height: 20px;
+        width: 20px;
+        background-color: $green;
+        color: $white;
+        border-radius: 50%;
+        display: inline-flex;
+        line-height: 1;
+        align-items: center;
+        justify-content: center;
+        margin-left: rem-calc(4);
+        cursor: pointer;
+
+        img{
+          height: 8px;
+          width: 8px;
+        }
+      }
+    }
+  }
+
+  .addPlayer{
+    background-color: rgba($black, 1);
+    padding: rem-calc(15 20 20);
+    color: $white;
+
+    &__form{
+      flex-wrap: wrap;
+      display: flex;
+    }
+  }

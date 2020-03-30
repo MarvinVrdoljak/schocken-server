@@ -1,0 +1,26 @@
+// Text meant only for screen readers. Addresses part of theme-check issue #840.
+// https://github.com/Automattic/_s/blob/master/style.css
+html,
+body {
+  font-family: $body-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: $black;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+
+  @include breakpoint(768px, up) {
+    font-size: 18px;
+  }
+
+  @include breakpoint(1024px, up) {
+      font-size: 20px;
+  }
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}

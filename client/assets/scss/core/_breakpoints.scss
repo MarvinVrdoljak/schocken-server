@@ -1,0 +1,37 @@
+/**********************************************************************************************************************/
+/* REGENERATE BREAKPOINTS MIXIN FOR SCSS */
+/* Usage example for "min-width: 1024px": @include breakpoint(large, up){} */
+/* Usage example for "max-width: 1023px": @include breakpoint(large, up){} */
+/**********************************************************************************************************************/
+@function map-get-strict($map, $key) {
+  @if map-has-key($map, $key) {
+      @return map-get($map, $key);
+    } @else {
+      @return '#{$key}';
+  }
+}
+
+@mixin breakpoint($breakpoint, $direction) {
+  $raw-query:  map-get-strict($breakpoints, $breakpoint);
+  $raw-direction: 'max-width';
+
+  @if $direction == up{
+    $raw-direction: 'min-width';
+  } @else if $direction == down {
+    $raw-direction: 'max-width';
+    $raw-query: $raw-query - 1px;
+  } @else{
+    @error "Unknown direction #{$direction}.";
+  }
+
+  @if $raw-query {
+    $query: "only screen and (#{$raw-direction} : #{$raw-query})";
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}

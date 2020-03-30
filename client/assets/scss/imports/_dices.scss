@@ -1,0 +1,43 @@
+.dices{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    // @include breakpoints()
+
+    &__dice{
+        margin: rem-calc(5 5 5 0);
+        line-height: 0;
+        border-radius: 5px;
+
+        img{
+            height: rem-calc(40);
+            width: rem-calc(40);
+        }
+
+        &--selected{
+           background-color: $green;
+        }
+
+        &--hidden{
+            background-color: black;
+            img{
+                opacity: 0;
+            }
+        }
+    }
+
+    &__buttons{
+        display: flex;
+        margin: rem-calc(5 0);
+    }
+
+    &__button{
+        padding: rem-calc(3);
+
+        img{
+            max-height: rem-calc(25);
+            max-width: rem-calc(25);
+        }
+    }
+}

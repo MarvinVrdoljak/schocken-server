@@ -1,0 +1,15 @@
+// Font Size
+$base-font-size: 16px;
+$base-line-height: 1.6;
+$header-line-height: 1.1;
+
+//Breakpoints
+$breakpoints: (
+        small: 0px,
+        medium: 768px,
+        large: 1024px,
+        // xlarge: 1280px
+);
+
+$body-font-family: 'SwissSignCircular-Regular', sans-serif;
+$header-font-family: 'SwissSignCircular-SemiBold', sans-serif;

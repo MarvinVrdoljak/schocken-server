@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('schockserver:server');
+var debug = require('debug')('schock-server:server');
 var http = require('http');
 
 /**

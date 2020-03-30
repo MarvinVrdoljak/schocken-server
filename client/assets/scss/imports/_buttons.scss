@@ -1,0 +1,48 @@
+.button{
+  border-radius: 8px;
+  line-height: 1;
+  background-color: $red;
+  color: $white;
+  border: none;
+  padding: rem-calc(10 22);
+  height: rem-calc(40);
+  min-width: rem-calc(40);
+  font-size: rem-calc(12);
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.25s ease-out;
+  margin-right: rem-calc(5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  outline: none !important;
+  cursor: pointer;
+
+  &:hover{
+      background-color: $red;
+  }
+
+  &--delete{
+      background-color: $black;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      padding: rem-calc(0);
+      margin-right: 0;
+
+      img{
+        height: 8px;
+        width: 8px;
+      }
+  }
+}

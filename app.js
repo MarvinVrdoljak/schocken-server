@@ -47,7 +47,12 @@ const server = http.createServer(app);
 
 const io = socketIo(server); // < Interesting!
 
-var dice = [1,2,3];
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Handle React routing, return all requests to React app
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 io.on("connection", socket => {
   socket.on("roll", data => {
