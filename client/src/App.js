@@ -4,7 +4,7 @@ import Players from "./components/Players";
 import bg from "./images/board.jpg";
 
 import "./App.css";
-const socket = require('socket.io-client/dist/socket.io')("http://127.0.0.1:4001");
+const socket = require('socket.io-client/dist/socket.io')("http://env-0915955.hidora.com/");
 
 function App() {
   const [players, setPlayers] = useState([
