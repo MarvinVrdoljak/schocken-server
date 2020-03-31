@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-//import React, { useState } from "react";
+import React, { useState } from "react";
 import AddPlayer from "./components/AddPlayer";
 import Players from "./components/Players";
 import bg from "./images/board.jpg";
