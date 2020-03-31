@@ -1,0 +1,11 @@
+.header {
+  background-color: rgba($black, 1);
+  padding: rem-calc(15 20 20);
+  color: $white;
+
+  &__info{
+    height: rem-calc(24);
+    width: rem-calc(24);
+    margin-left: rem-calc(5);
+  }
+}

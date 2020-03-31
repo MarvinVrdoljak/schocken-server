@@ -111,13 +111,13 @@ const getDices = state.dices.map((dice, index) => {
     <div className="dices">
       {getDices}
       <div className="dices__buttons">
-        <button className="button dices__button" onClick={changeDices}>
+        <button className={"button button--icon dices__button" + (state.round >= 3 ? ' disable' : '')} onClick={changeDices}>
           <img src={rollIcon} alt="Würfeln"/>
         </button>
-        <button className="button dices__button" onClick={showDices}>
+        <button className="button button--icon dices__button" onClick={showDices}>
         <img src={showIcon} alt="Aufdecken"/>
           </button>
-        <button className="button dices__button" onClick={hideDices}>
+        <button className="button button--icon dices__button" onClick={hideDices}>
           <img src={hideIcon} alt="Verdecken"/>
         </button>
       </div>

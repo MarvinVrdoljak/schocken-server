@@ -1,0 +1,62 @@
+@import 'settings';
+
+@import 'core/colors';
+@import 'core/breakpoints';
+@import 'core/functions';
+@import 'core/base';
+
+@import 'imports/header';
+@import 'imports/buttons';
+@import 'imports/form';
+@import 'imports/modal';
+@import 'imports/footer';
+
+@import 'imports/player';
+@import 'imports/dices';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body{
+    font-family: Arial;
+  }
+
+  a{
+    color: #333;
+    text-decoration: none;
+  }
+
+  .board{
+      background-position: center center;
+      min-height: 100vh;
+      padding: rem-calc(20);
+      background-size: cover;
+  }
+
+  .addPlayer{
+    margin-bottom: rem-calc(10);
+
+    &__form{
+      flex-wrap: wrap;
+      display: flex;
+
+      input[type="text"]{
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        margin: 0;
+        border-color: $white;
+      }
+
+      .button{
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  .board__buttons{
+    display: flex;
+  }

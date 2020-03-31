@@ -1,15 +1,9 @@
 {
-  "name": "schocken-react-server",
+  "name": "react_basic",
   "version": "0.1.0",
+  "homepage": "https://marvin.vrdoljak.de",
   "private": true,
-  "proxy": "http://localhost:4001/",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "autoprefixer": "^9.3.1",
@@ -22,6 +16,9 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
   },

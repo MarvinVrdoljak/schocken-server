@@ -1,0 +1,45 @@
+/**********************************************************************************************************************/
+/* FORM */
+/**********************************************************************************************************************/
+[type="text"],
+[type="password"],
+[type="date"],
+[type="datetime"],
+[type="datetime-local"],
+[type="month"],
+[type="week"],
+[type="email"],
+[type="number"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="url"],
+[type="color"],
+textarea,
+select {
+    resize: none;
+    line-height: 1;
+    width: rem-calc(150);
+    border: none;
+    border: 1px solid $black;
+    color: $black;
+    font-size: rem-calc(16);
+    padding: rem-calc(10);
+    border-radius: 0;
+    outline: none !important;
+    font-family: $body-font-family;
+    background-color: $white;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: rem-calc(5);
+}
+
+textarea{
+    height: rem-calc(100);
+}
+
+::placeholder {
+    color: $black;
+  }
+
+
