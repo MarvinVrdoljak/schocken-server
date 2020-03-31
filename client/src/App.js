@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import AddPlayer from "./components/AddPlayer";
 import Players from "./components/Players";
 import bg from "./images/board.jpg";
-import socketIOClient from "socket.io-client";
 
 import "./App.css";
+const socket = require('socket.io-client/dist/socket.io')("http://127.0.0.1:4001");
 
 function App() {
   const [players, setPlayers] = useState([
@@ -27,19 +27,14 @@ function App() {
 
   const [playerId, setPlayerId] = useState(players.length + 1);
 
-   const [response, setResponse] = useState(false);
-   const [endpoint] = useState("localhost:4001");
-
-   const socket = socketIOClient(endpoint);
-
-   useEffect(() =>{
-     console.log(players);
-         socket.emit("roll", players);
-   })
+    socket.on('connect', function(data) {
+        console.log("Connected...");
+        socket.emit("roll", players);
+    });
 
    socket.on("roll", data => {
      console.log(data);
-   })
+   });
 
 
   function updatePlayerDices(id, dices, addRound){
@@ -54,6 +49,7 @@ function App() {
         return player;
       })
     )
+      socket.emit("roll", players);
   }
 
 

@@ -4,13 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const socketIo = require("socket.io");
-const axios = require("axios");
 const http = require("http");
 
 const port = process.env.PORT || 4001;
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -23,12 +19,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,10 +40,9 @@ const server = http.createServer(app);
 
 const io = socketIo(server); // < Interesting!
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-
 
 io.on("connection", socket => {
+  console.log("Client connected");
   socket.on("roll", data => {
     console.log("Rooooooolled");
     io.emit("roll", data);
