@@ -7,6 +7,7 @@ const socketIo = require("socket.io");
 const http = require("http");
 
 const port = process.env.PORT || 4001;
+var indexRouter = require('./routes/index');
 
 var app = express();
 
@@ -27,6 +28,8 @@ app.use(function(req, res, next) {
 app.use('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
+
+app.use('/index', indexRouter);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
