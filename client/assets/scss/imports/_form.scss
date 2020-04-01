@@ -17,15 +17,14 @@
 [type="color"],
 textarea,
 select {
+    -webkit-appearance: none;
     resize: none;
     line-height: 1;
     width: rem-calc(150);
-    border: none;
     border: 1px solid $black;
     color: $black;
     font-size: rem-calc(16);
     padding: rem-calc(10);
-    border-radius: 0;
     outline: none !important;
     font-family: $body-font-family;
     background-color: $white;
