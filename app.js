@@ -28,8 +28,6 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('*', function(req, res) {
   res.header('Access-Control-Allow-Origin', 'http://env-0915955.hidora.com/');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
@@ -49,6 +47,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 const server = http.createServer(app);
 
 const io = socketIo(server); // < Interesting!

@@ -62,7 +62,6 @@ function App() {
           return player;
         })
         )
-    socket.emit("roll", players);
   }
 
 
