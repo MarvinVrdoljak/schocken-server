@@ -7,7 +7,7 @@ import bg from "./images/board.jpg";
 import infoIcon from "./images/info.svg";
 
 import "./App.css";
-const socket = require('socket.io-client/dist/socket.io')();//"http://env-0915955.hidora.com:4001"
+const socket = require('socket.io-client/dist/socket.io')("env-0915955.hidora.com:4001");
 
 function App() {
   const [game, setGame] = useState({
