@@ -41,6 +41,7 @@ function App() {
 
    socket.on("roll", data => {
      console.log(data);
+     setPlayers(data);
    });
 
 
@@ -62,6 +63,7 @@ function App() {
           return player;
         })
         )
+       socket.emit("roll", players);
   }
 
 
