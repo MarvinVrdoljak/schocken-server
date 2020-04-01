@@ -65,7 +65,7 @@ io.on("connection", socket => {
   console.log("Client connected");
   socket.on("roll", data => {
     console.log("Rooooooolled");
-    //io.emit("roll", data);
+    io.emit("roll", data);
   });
   socket.on("disconnect", () => console.log("Client disconnected"));
 });
