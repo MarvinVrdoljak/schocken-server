@@ -1,0 +1,59 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba($black, 0.85);
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+  padding: rem-calc(30 15);
+
+  @include breakpoint(medium, up){
+    align-items: center;
+  }
+
+  &__wrapper {
+    background-color: $white;
+    width: 90%;
+    max-width: rem-calc(500);
+    padding: rem-calc(20);
+    border-radius: 5px;
+    position: relative;
+
+    p {
+      font-size: rem-calc(14);
+      margin-bottom: rem-calc(20);
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: rem-calc(-15);
+    right: rem-calc(-15);
+    height: rem-calc(30);
+    width: rem-calc(30);
+    background-color: $red;
+
+    img {
+      height: rem-calc(10);
+      width: rem-calc(10);
+    }
+  }
+
+  &__content{
+    overflow: auto;
+    height: 100%;
+  }
+
+  &--open {
+    visibility: visible;
+  }
+}

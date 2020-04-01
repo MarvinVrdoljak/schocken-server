@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import addPlayerIcon from '../images/add-player.svg';
 
 function AddPlayer(state) {
 const [newPlayer, setNewPlayer] = useState('');
@@ -20,11 +21,12 @@ function onSubmit(e){
 
   return (
     <div className="addPlayer">
-      <h1>Schocoronia</h1>
-      <form onSubmit={onSubmit} className="addPlayer__form">
-        <input type="text" name="title" placholder="Spieler hinzufügen" value={newPlayer} onChange={onChange}/>
-        <input className="button" type="submit" value="Spieler hinzufügen"/>
-      </form>
+      <div className="addPlayer__form">
+        <input type="text" name="title" placeholder="Spielername" value={newPlayer} onChange={onChange}/>
+        <button className="button button--icon" onClick={onSubmit}>
+          <img src={addPlayerIcon} alt="Spieler hinzufügen"/>
+        </button>
+      </div>
     </div>
     )
 }

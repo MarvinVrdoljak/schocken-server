@@ -1,0 +1,10 @@
+.footer{
+  padding: rem-calc(20);
+  background-color: $black;
+  color: $white;
+
+  a{
+    color: $white;
+    text-decoration: underline;
+  }
+}
