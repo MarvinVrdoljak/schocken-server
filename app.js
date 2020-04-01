@@ -51,7 +51,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-res.header('Access-Control-Allow-Origin', 'example.com');
 const server = http.createServer(app);
 
 const io = socketIo(server); // < Interesting!
