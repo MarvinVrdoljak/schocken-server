@@ -27,14 +27,12 @@ app.use('/index', indexRouter);
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-app.use(function(req, res) {
-
   res.header('Access-Control-Allow-Origin', 'http://env-0915955.hidora.com/');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
