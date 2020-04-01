@@ -6,7 +6,7 @@ var logger = require('morgan');
 const socketIo = require("socket.io");
 const http = require("http");
 
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 8080;
 var indexRouter = require('./routes/index');
 
 var app = express();
