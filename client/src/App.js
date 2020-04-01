@@ -37,7 +37,6 @@ function App() {
 
     socket.on('connect', function(data) {
         console.log("Connected...");
-        socket.emit("roll", players);
     });
 
    socket.on("roll", data => {
