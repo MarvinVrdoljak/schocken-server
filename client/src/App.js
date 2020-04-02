@@ -31,23 +31,23 @@ function App() {
 
   useEffect(() => {
       socket.on("update", data => {
-        console.log(data);
+        console.log("updated");
         setPlayers(data.players);
         setGame(data.game);
       });
   },[]);
 
-  function updateAll(){
-    socket.emit("update", {players, game});
-  }
+
+   function updateAll(players, game){
+     socket.emit("update", {players, game});
+   }
 
    function updateModalStatus(){
     setGame({...game, modalIsOpen: !game.modalIsOpen});
   }
 
    function updatePlayerDices(id, dices, addRound){
-     setPlayers(
-       players.map(player => {
+     const updatedPlayers = players.map(player => {
          if (player.id === id) {
            player.dices = dices;
            if(addRound){
@@ -56,59 +56,60 @@ function App() {
           }
           return player;
         })
-      )
-      updateAll();
+
+      updateAll(updatedPlayers, game);
   }
 
 
   function deletePlayer(id) {
-    setPlayers([...players.filter(player => player.id !== id)]);
+    const updatedPlayers = [...players.filter(player => player.id !== id)];
     // socket.emit("update", {players});
-    updateAll();
+    updateAll(updatedPlayers, game);
   }
 
   function addPlayer(name) {
-    setPlayers([...players, {id: game.playerId, name, round: 0, batch: 0, loser: false, dices: [
+    const updatedPlayers = ([...players, {id: game.playerId, name, round: 0, batch: 0, loser: false, dices: [
       {id: 1, value: 1, selected: false, visible: true},
       {id: 2, value: 2, selected: false, visible: true},
       {id: 3, value: 3, selected: false, visible: true},
     ]}]);
-    setGame({...game, playerId: players.length + 1});
-    // socket.emit("update", {players, game});
+    const updatedGame = {...game, playerId: players.length + 1};
+    updateAll(updatedPlayers, updatedGame);
   }
 
   function addBatch(id){
-    setPlayers(
-      players.map(player => {
+    let updatedGame = game;
+    const updatedPlayers = players.map(player => {
         if (player.id === id && game.batches > 0) {
           player.batch =  player.batch + 1;
           if (player.batch === 13){
-            setGame({...game, isHalfDone: true, batches: game.batches - 1});
+            updatedGame = {...game, isHalfDone: true, batches: game.batches - 1};
           } else{
-            setGame({...game, isHalfDone: false, batches: game.batches - 1});
+            updatedGame = {...game, isHalfDone: false, batches: game.batches - 1};
           }
         }
         return player;
       })
-    )
+      updateAll(updatedPlayers, updatedGame);
+
   }
 
   function removeBatch(id){
-    setPlayers(
-      players.map(player => {
+    let updatedGame = game;
+    const updatedPlayers = players.map(player => {
         if (player.id === id && player.batch >= 1) {
           player.batch = player.batch - 1;
-          setGame({...game, batches: game.batches + 1});
+          updatedGame = {...game, batches: game.batches + 1};
         }
         return player;
       })
-    )
+
+    updateAll(updatedPlayers, updatedGame);
   }
 
 
   function resetRound(resetPlayerBatches, resetLoser){
-    setPlayers(
-      players.map(player => {
+    const updatedPlayers = players.map(player => {
         player.round = 1;
         player.dices = [
           {id: 1, value: Math.floor(Math.random() * 6) + 1, selected: false, visible: false},
@@ -123,20 +124,20 @@ function App() {
         }
         return player;
       })
-    )
+      updateAll(updatedPlayers, game);
   }
 
   function resetHalf(){
+    let updatedGame = game
     if (game.half === 1 || game.half === 2){
       players.map(player => {
         if (player.batch === 13 && player.loser === false){
           player.loser = true;
           resetRound(true, false);
-          setGame({...game, setIsHalfDone: false, batches: 13, half: game.half + 1});
+          updatedGame = {...game, setIsHalfDone: false, batches: 13, half: game.half + 1};
         } else if (player.batch === 13 && player.loser === true){
           window.confirm('Da hat wohl ein Noob direkt 2x verloren! Ihr beginnt direkt ein neues Spiel!')
-          // setHalf(1);
-          setGame({...game, setIsHalfDone: false, batches: 13, half: 1});
+          updatedGame = {...game, setIsHalfDone: false, batches: 13, half: 1};
           resetRound(true, true);
         }
         return player;
@@ -144,8 +145,9 @@ function App() {
 
     } else{
       resetRound(true, true);
-      setGame({...game, setIsHalfDone: false, batches: 13, half: 1});
+      updatedGame = {...game, setIsHalfDone: false, batches: 13, half: 1};
     }
+    updateAll(players, updatedGame);
   }
 
   return (
