@@ -8,8 +8,8 @@ import infoIcon from "./images/info.svg";
 import axios from 'axios';
 
 import "./App.css";
-const socket = require('socket.io-client/dist/socket.io')("localhost:8080");
-// const socket = require('socket.io-client/dist/socket.io')("env-0915955.hidora.com:8080");
+//const socket = require('socket.io-client/dist/socket.io')("localhost:8080");
+const socket = require('socket.io-client/dist/socket.io')("env-0915955.hidora.com:8080");
 
 function App() {
 
