@@ -177,7 +177,7 @@ function App() {
       <header className="header">
           <h1>Schocoronia <img className="header__info" src={infoIcon} alt="Wichtige Hinweise" onClick={e => toggleInfoModal()}/> <img className="header__info" src={settingsIcon} alt="settings" onClick={e => toggleSettingsModal()}/></h1>
           <AddPlayer addPlayer={addPlayer}/>
-          <p><small><strong>Hälfte: { game.half !== 3 ? game.half : 'Loser-Round' } / Verbleibende Batches: {game.batches}</strong></small></p>
+          <p><small><strong>Hälfte: { game.half !== 3 ? game.half : 'Loser-Round' } / Verbleibende Batches: {game.batches} / Spendenrate: {game.donationRate}€</strong></small></p>
       </header>
       <main className="board" style={{backgroundImage:  `url(${bg})`}}>
         <Players players={players} batches={game.batches} updatePlayerDices={updatePlayerDices} deletePlayer={deletePlayer} addBatch={addBatch} removeBatch={removeBatch} />
