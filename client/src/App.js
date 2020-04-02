@@ -16,14 +16,14 @@ function App() {
   const [game, setGame] = useState({})
   const [players, setPlayers] = useState([])
 
-  useEffect(() =>{
+/*  useEffect(() =>{
     axios.get('/game-data/game-data.json')
     .then(res => {
       console.log('Data recieved');
       setGame(res.data.game);
       setPlayers(res.data.players);
     })
-  },[])
+  },[])*/
 
   socket.on('connect', function(data) {
       console.log("Connected...");

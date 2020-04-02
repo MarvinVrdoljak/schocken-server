@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const socketIo = require("socket.io");
 const http = require("http");
+const fs = require("fs");
 
 const port = process.env.PORT || 8080;
 var indexRouter = require('./routes/index');
@@ -30,7 +31,6 @@ app.use(function(req, res, next) {
 });
 
 app.use('*', function(req, res) {
-  //res.header('Access-Control-Allow-Origin', 'http://env-0915955.hidora.com/');
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
@@ -58,8 +58,15 @@ const io = socketIo(server); // < Interesting!
 
 io.on("connection", socket => {
   console.log("Client connected");
+  socket.emit("update", JSON.parse(fs.readFileSync(path.join(__dirname, 'tmp', 'game-data.json'))));
+
   socket.on("update", data => {
     console.log("updated");
+    fs.writeFile(path.join(__dirname, 'tmp', 'game-data.json'), JSON.stringify(data), function(err) {
+      if(err) {
+        return console.log(err);
+      }
+    });
     io.emit("update", data);
   });
   socket.on("disconnect", () => console.log("Client disconnected"));
