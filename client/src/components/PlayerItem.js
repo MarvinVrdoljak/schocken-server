@@ -6,12 +6,12 @@ import minusIcon from '../images/minus.svg';
 import loserIcon from '../images/loser.svg';
 
 function PlayerItem(state) {
-  const {id, name, round, batch, loser, dices} = state.player;
+  const {id, name, round, batch, loses, donation, dices} = state.player;
   const batches = state.batches;
 
   return (
     <div className={"player"}>
-      <h3 className="player__name">{name} { loser ? <img className="player__loser" src={loserIcon} alt="1. Hälfte verloren"/> :''} </h3>
+      <h3 className="player__name">{name} ({donation}€ Spende) { loses !== 0 ? <img className="player__loser" src={loserIcon} alt="1. Hälfte verloren"/> : ''} </h3>
       <div className="player__meta">
           <span><strong>Gewürfelt: {round}x&nbsp;//&nbsp;</strong></span>
           <span><strong>Batches: {batch}</strong></span>

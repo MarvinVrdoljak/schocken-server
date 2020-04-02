@@ -58,7 +58,10 @@ const io = socketIo(server); // < Interesting!
 
 io.on("connection", socket => {
   console.log("Client connected");
-  socket.emit("update", JSON.parse(fs.readFileSync(path.join(__dirname, 'tmp', 'game-data.json'))));
+  setTimeout(function(){
+    socket.emit("update", JSON.parse(fs.readFileSync(path.join(__dirname, 'tmp', 'game-data.json'))));
+   }, 300);
+
 
   socket.on("update", data => {
     console.log("updated");

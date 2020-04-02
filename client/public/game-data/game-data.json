@@ -1,7 +1,6 @@
 {
     "game": {
         "isUpdated": false,
-        "modalIsOpen": false,
         "half": 1,
         "isHalfDone": false,
         "batches": 13,

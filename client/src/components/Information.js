@@ -5,7 +5,7 @@ function Information(state) {
   return (
     <div className={"modal" + (state.modalIsOpen ? ' modal--open' : '')}>
         <div className="modal__wrapper">
-            <a href="#/" className="modal__close button button--delete" onClick={() => state.updateModalStatus()}><img src={crossIcon} alt="Wichtige Hinweise"/></a>
+            <a href="#/" className="modal__close button button--delete" onClick={() => state.toggleInfoModal()}><img src={crossIcon} alt="Wichtige Hinweise"/></a>
             <div className="modal__content">
                 <h2>Informationen</h2>
                 <p><strong>Willkommen bei Schocoronia - <a href="https://www.spielregeln.de/schocken.html" target="_blank" rel="noopener noreferrer" alt="Regeln">Schocken</a> für die Quarantäne Zeit!</strong></p>

@@ -51,6 +51,22 @@
   &__content{
     overflow: auto;
     height: 100%;
+
+    &__rate{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1;
+
+      .value{
+        font-size: rem-calc(30);
+        font-weight: bolder;
+      }
+
+      .button--tiny{
+        margin: rem-calc(0 10);
+      }
+    }
   }
 
   &--open {
