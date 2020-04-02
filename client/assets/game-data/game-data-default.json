@@ -1,0 +1,27 @@
+{
+    "game": {
+        "isUpdated": false,
+        "modalIsOpen": false,
+        "half": 1,
+        "isHalfDone": false,
+        "batches": 13,
+        "playerId": 100,
+        "donationRate": 1
+      },
+      "players": [
+        { "id": 1,
+          "name": "Spieler 1", "round": 0, "batch": 0, "loses": 0, "donation": 0, "dices": [
+            {"id": 1, "value": 1, "selected": false, "visible": true},
+            {"id": 2, "value": 2, "selected": false, "visible": true},
+            {"id": 3, "value": 3, "selected": false, "visible": true}
+          ]
+        },
+        { "id": 2,
+          "name": "Spieler 2", "round": 0, "batch": 0, "loses": 0, "donation": 0, "dices": [
+            {"id": 1, "value": 1, "selected": false, "visible": true},
+            {"id": 2, "value": 2, "selected": false, "visible": true},
+            {"id": 3, "value": 3, "selected": false, "visible": true}
+          ]
+        }
+      ]
+}
