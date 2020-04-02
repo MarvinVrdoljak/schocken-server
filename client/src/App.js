@@ -1,51 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddPlayer from "./components/AddPlayer";
 import Players from "./components/Players";
 import Information from "./components/Information";
 import Footer from "./components/Footer";
 import bg from "./images/board.jpg";
 import infoIcon from "./images/info.svg";
+import axios from 'axios';
 
 import "./App.css";
-const socket = require('socket.io-client/dist/socket.io')("env-0915955.hidora.com:8080");
+const socket = require('socket.io-client/dist/socket.io')("localhost:8080");
+// const socket = require('socket.io-client/dist/socket.io')("env-0915955.hidora.com:8080");
 
 function App() {
-  const [game, setGame] = useState({
-    modalIsOpen: false,
-    half: 1,
-    isHalfDone: false,
-    batches: 13,
-    playerId: 100
-  })
 
-  const [players, setPlayers] = useState([
-    { id: 1,
-      name: "Marvin", round: 0, batch: 0, loser: false, dices: [
-        {id: 1, value: 1, selected: false, visible: true},
-        {id: 2, value: 2, selected: false, visible: true},
-        {id: 3, value: 3, selected: false, visible: true},
-      ]
-    },
-    { id: 2,
-      name: "Simon", round: 0, batch: 0, loser: false, dices: [
-        {id: 1, value: 1, selected: false, visible: true},
-        {id: 2, value: 2, selected: false, visible: true},
-        {id: 3, value: 3, selected: false, visible: true},
-      ]
-    },
-  ]);
+  const [game, setGame] = useState({})
+  const [players, setPlayers] = useState([])
 
-    socket.on('connect', function(data) {
-        console.log("Connected...");
-    });
+  useEffect(() =>{
+    axios.get('/game-data/game-data.json')
+    .then(res => {
+      console.log('Data recieved');
+      setGame(res.data.game);
+      setPlayers(res.data.players);
+    })
+  },[])
 
-   socket.on("roll", data => {
-     console.log(data);
-     setPlayers(data);
-   });
+  socket.on('connect', function(data) {
+      console.log("Connected...");
+  });
 
+  useEffect(() => {
+      socket.on("update", data => {
+        console.log(data);
+        setPlayers(data.players);
+        setGame(data.game);
+      });
+  },[]);
 
-
+  function updateAll(){
+    socket.emit("update", {players, game});
+  }
 
    function updateModalStatus(){
     setGame({...game, modalIsOpen: !game.modalIsOpen});
@@ -62,13 +56,15 @@ function App() {
           }
           return player;
         })
-        )
-       socket.emit("roll", players);
+      )
+      updateAll();
   }
 
 
   function deletePlayer(id) {
     setPlayers([...players.filter(player => player.id !== id)]);
+    // socket.emit("update", {players});
+    updateAll();
   }
 
   function addPlayer(name) {
@@ -78,6 +74,7 @@ function App() {
       {id: 3, value: 3, selected: false, visible: true},
     ]}]);
     setGame({...game, playerId: players.length + 1});
+    // socket.emit("update", {players, game});
   }
 
   function addBatch(id){
@@ -156,7 +153,7 @@ function App() {
       <header className="header">
           <h1>Schocoronia <img className="header__info" src={infoIcon} alt="Wichtige Hinweise" onClick={e => updateModalStatus()}/></h1>
           <AddPlayer addPlayer={addPlayer}/>
-          <p><small><strong>Hälfte: { game.half !== 3 ? game.half : 'Loser-Round' } // Verbleibende Batches: {game.batches}</strong></small></p>
+          <p><small><strong>Hälfte: { game.half !== 3 ? game.half : 'Loser-Round' } / Verbleibende Batches: {game.batches}</strong></small></p>
       </header>
       <main className="board" style={{backgroundImage:  `url(${bg})`}}>
         <Players players={players} batches={game.batches} updatePlayerDices={updatePlayerDices} deletePlayer={deletePlayer} addBatch={addBatch} removeBatch={removeBatch} />

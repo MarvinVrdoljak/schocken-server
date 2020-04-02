@@ -17,6 +17,10 @@ var paths = {
         src: "./assets/images/**/*",
         dest: "./src/images"
     },
+    gameData: {
+        src: "./assets/game-data/**/*",
+        dest: "./public/game-data"
+    },
     fonts: {
         src: "./src/assets/fonts/**/*",
         dest: "./dist/fonts"
@@ -61,6 +65,11 @@ function images() {
         .pipe(gulp.dest(paths.images.dest));
 }
 
+function gameData() {
+    return gulp.src(paths.gameData.src)
+        .pipe(gulp.dest(paths.gameData.dest));
+}
+
 function fonts() {
     return gulp.src(paths.fonts.src)
         .pipe(gulp.dest(paths.fonts.dest));
@@ -76,6 +85,6 @@ function watchjs() {
 }
 
 
-gulp.task("default", gulp.parallel(watch, images));
+gulp.task("default", gulp.parallel(watch, images, gameData));
 gulp.task("watch", gulp.parallel(watch));
-gulp.task("build", gulp.parallel(styleMinified, images, fonts));
+gulp.task("build", gulp.parallel(styleMinified, images, gameData, fonts));

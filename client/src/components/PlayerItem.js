@@ -20,9 +20,9 @@ function PlayerItem(state) {
 
       </div>
       <PlayerDices id={id} dices={dices} round={round} updatePlayerDices={state.updatePlayerDices} />
-        <a className={"button button--delete"} href="#/" onClick={state.deletePlayer.bind(this, id)}>
-          <img src={crossIcon} />
-        </a>
+        <span className={"button button--delete"} href="#/" onClick={state.deletePlayer.bind(this, id)}>
+          <img src={crossIcon} alt="Löschen" />
+        </span>
     </div>
   )
 }

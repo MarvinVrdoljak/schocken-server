@@ -10,7 +10,6 @@ const port = process.env.PORT || 8080;
 var indexRouter = require('./routes/index');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,12 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 app.use('/index', indexRouter);
-
 app.use(express.static(path.join(__dirname, 'client/build')));
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "env-0915955.hidora.com*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -63,9 +58,9 @@ const io = socketIo(server); // < Interesting!
 
 io.on("connection", socket => {
   console.log("Client connected");
-  socket.on("roll", data => {
-    console.log("Rooooooolled");
-    io.emit("roll", data);
+  socket.on("update", data => {
+    console.log("updated");
+    io.emit("update", data);
   });
   socket.on("disconnect", () => console.log("Client disconnected"));
 });
