@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/index', indexRouter);
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://env-0915955.hidora.com*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
@@ -31,7 +31,6 @@ app.use(function(req, res, next) {
 });
 
 app.use('*', function(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
