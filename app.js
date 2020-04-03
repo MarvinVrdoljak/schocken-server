@@ -31,6 +31,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('*', function(req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
