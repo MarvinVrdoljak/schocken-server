@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/index', indexRouter);
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "45.66.222.253*");
+  res.header("Access-Control-Allow-Origin", "env-0915955.hidora.com*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
