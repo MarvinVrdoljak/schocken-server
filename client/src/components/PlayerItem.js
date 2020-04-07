@@ -6,7 +6,7 @@ import minusIcon from '../images/minus.svg';
 import loserIcon from '../images/loser.svg';
 
 function PlayerItem(state) {
-  const {id, name, round, batch, loses, donation, dices} = state.player;
+  const {id, name, round, batch, loses, donation, rolled, dices} = state.player;
   const batches = state.batches;
 
   return (
@@ -19,7 +19,7 @@ function PlayerItem(state) {
           <span className={"player__meta__button" + (batch === 0 ? ' disable' : '')} onClick={state.removeBatch.bind(this, id)}><img src={minusIcon} alt="Aufdecken"/></span>
 
       </div>
-      <PlayerDices id={id} dices={dices} round={round} updatePlayerDices={state.updatePlayerDices} />
+      <PlayerDices id={id} dices={dices} round={round} rolled={rolled} updatePlayerDices={state.updatePlayerDices} />
         <span className={"button button--delete"} href="#/" onClick={state.deletePlayer.bind(this, id)}>
           <img src={crossIcon} alt="Löschen" />
         </span>

@@ -1,7 +1,5 @@
 {
     "game": {
-        "isUpdated": false,
-        "modalIsOpen": false,
         "half": 1,
         "isHalfDone": false,
         "batches": 13,
@@ -10,14 +8,14 @@
       },
       "players": [
         { "id": 1,
-          "name": "Spieler 1", "round": 0, "batch": 0, "loses": 0, "donation": 0, "dices": [
+          "name": "Spieler 1", "round": 0, "batch": 0, "loses": 0, "donation": 0, "rolled": false, "dices": [
             {"id": 1, "value": 1, "selected": false, "visible": true},
             {"id": 2, "value": 2, "selected": false, "visible": true},
             {"id": 3, "value": 3, "selected": false, "visible": true}
           ]
         },
         { "id": 2,
-          "name": "Spieler 2", "round": 0, "batch": 0, "loses": 0, "donation": 0, "dices": [
+          "name": "Spieler 2", "round": 0, "batch": 0, "loses": 0, "donation": 0, "rolled": false, "dices": [
             {"id": 1, "value": 1, "selected": false, "visible": true},
             {"id": 2, "value": 2, "selected": false, "visible": true},
             {"id": 3, "value": 3, "selected": false, "visible": true}

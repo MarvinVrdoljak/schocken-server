@@ -19,7 +19,7 @@ function PlayerDices(state) {
         return dice;
       })
 
-    state.updatePlayerDices(state.id, dices);
+    state.updatePlayerDices(state.id, state.rolled, dices);
   }
 
   function checkForSix(){
@@ -28,14 +28,17 @@ function PlayerDices(state) {
         if(dice.selected === false){
           if(dice.value === 6){
             sixArray.push('1');
-            if (sixArray.length === 2 && state.round < 3){
-              window.confirm('Ey du Pissenelke, willst du eine 6 zu einer 1 machen?') ? dice.value = 1 : dice.value = 6
+            if (sixArray.length >= 2 && state.round < 3){
+              if (window.confirm('Ey du Pissenelke, willst du eine 6 zu einer 1 machen?')){
+                dice.value = 1
+                dice.selected = true
+              }
             }
           }
         }
         return dice;
       })
-      state.updatePlayerDices(state.id, dices);
+      state.updatePlayerDices(state.id, false, dices);
 
   }
 
@@ -45,11 +48,11 @@ function PlayerDices(state) {
         return dice;
       })
 
-      state.updatePlayerDices(state.id, dices);
+      state.updatePlayerDices(state.id, false, dices);
 
       setTimeout(function() {
         checkForSix();
-    }, 500);
+    }, 100); //TODO: EIGENES OVERLAY SCHREIBEN FÜR ABFRAGE
   }
 
   function hideDices(){
@@ -59,7 +62,7 @@ function PlayerDices(state) {
         }
         return dice;
       })
-      state.updatePlayerDices(state.id, dices);
+      state.updatePlayerDices(state.id, state.rolled, dices);
   }
 
 
@@ -74,9 +77,8 @@ function PlayerDices(state) {
       return dice;
     })
 
-    state.updatePlayerDices(state.id, dices, true);
+    state.updatePlayerDices(state.id, true, dices, true);
  }
-
 
 const getDices = state.dices.map((dice, index) => {
 
@@ -111,7 +113,7 @@ const getDices = state.dices.map((dice, index) => {
     <div className="dices">
       {getDices}
       <div className="dices__buttons">
-        <button className={"button button--icon dices__button" + (state.round >= 3 ? ' disable' : '')} onClick={changeDices}>
+        <button className={"button button--icon dices__button" + (state.round >= 3 || state.rolled ? ' disable' : '')} onClick={changeDices}>
           <img src={rollIcon} alt="Würfeln"/>
         </button>
         <button className="button button--icon dices__button" onClick={showDices}>
