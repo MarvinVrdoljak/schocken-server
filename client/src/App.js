@@ -10,8 +10,8 @@ import settingsIcon from "./images/settings.svg";
 import axios from "axios";
 
 import "./App.css";
-// const socket = require('socket.io-client/dist/socket.io')("localhost:8080");
-const socket = require('socket.io-client/dist/socket.io')("45.66.222.254:8080");
+const socket = require('socket.io-client/dist/socket.io')("localhost:8080");
+// const socket = require('socket.io-client/dist/socket.io')("45.66.222.254:8080");
 
 function App() {
 
@@ -139,17 +139,26 @@ function App() {
     let updatedGame = game
     let updatedPlayers = players
       updatedPlayers = players.map(player => {
-        if (player.batch === 13 && player.loses === 0){
-          player.loses =  player.loses + 1;
-          resetRound(true, false);
-          updatedGame = {...game, isHalfDone: false, batches: 13, half: game.half + 1};
-        } else if (player.batch === 13 && player.loses === 1){
-          if (game.half === 2){
-            window.confirm('Da hat wohl ein Noob direkt 2x verloren! Ihr beginnt direkt ein neues Spiel!')
-          }
-          updatedGame = {...game, isHalfDone: false, batches: 13, half: 1};
-          player.donation = player.donation + game.donationRate;
-          resetRound(true, true);
+        if (player.batch === 13){
+            if (player.loses === 0){
+              if (game.half === 3){
+                window.confirm('Hast sich da echt wer in der Loser-Round eingewürfelt? Da wurde dem Wort Loser alle Ehre gemacht.')
+                updatedGame = {...game, isHalfDone: false, batches: 13, half: 1};
+                player.donation = player.donation + game.donationRate;
+                resetRound(true, true);
+              } else{
+                player.loses =  player.loses + 1;
+                updatedGame = {...game, isHalfDone: false, batches: 13, half: game.half + 1};
+                resetRound(true, false);
+              }
+            } else if(player.loses === 1){
+              if (game.half === 2){
+                window.confirm('Da hat wohl ein Noob direkt 2x verloren! Ihr beginnt direkt ein neues Spiel!')
+              }
+              updatedGame = {...game, isHalfDone: false, batches: 13, half: 1};
+              player.donation = player.donation + game.donationRate;
+              resetRound(true, true);
+            }
         }
         return player;
       })
