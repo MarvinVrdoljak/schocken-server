@@ -24,3 +24,10 @@ body {
 small{
   font-size: rem-calc(13);
 }
+
+.board{
+  background-position: center center;
+  min-height: 100vh;
+  padding: rem-calc(10);
+  background-size: cover;
+}

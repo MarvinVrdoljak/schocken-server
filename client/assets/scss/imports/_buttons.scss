@@ -1,7 +1,7 @@
 .button {
   border-radius: 8px;
   line-height: 1;
-  background-color: $red;
+  background-color: $brown;
   color: $white;
   border: none;
   padding: rem-calc(10 22);
@@ -21,7 +21,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $red;
+    background-color: $green;
   }
 
   &--delete {
@@ -43,6 +43,10 @@
     img {
       height: 8px;
       width: 8px;
+    }
+
+    &:hover{
+      background-color: $red;
     }
   }
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import AddPlayer from "./components/AddPlayer";
 import Players from "./components/Players";
 import Information from "./components/Information";
 import Settings from "./components/Settings";
@@ -78,7 +77,7 @@ function App() {
       ]
     }]);
     const updatedGame = { ...game, playerId: players.length + 1 };
-
+    setSettingsModal(false);
     updateAll(updatedPlayers, updatedGame);
   }
 
@@ -126,6 +125,7 @@ function App() {
   function resetRound(resetPlayerBatches, resetLoser){
     const updatedPlayers = players.map(player => {
         player.round = 1;
+        player.rolled = true;
         player.dices = [
           {id: 1, value: Math.floor(Math.random() * 6) + 1, selected: false, visible: false},
           {id: 2, value: Math.floor(Math.random() * 6) + 1, selected: false, visible: false},
@@ -191,27 +191,35 @@ function App() {
 
   return (
     <div className="App">
+
       <header className="header">
-          <h1>Schocoronia <img className="header__info" src={infoIcon} alt="Wichtige Hinweise" onClick={e => toggleInfoModal()}/> <img className="header__info" src={settingsIcon} alt="settings" onClick={e => toggleSettingsModal()}/></h1>
-          <AddPlayer addPlayer={addPlayer}/>
-          <p><small><strong>Hälfte: { game.half !== 3 ? game.half : 'Loser-Round' } / Verbleibende Batches: {game.batches} / Spendenrate: {game.donationRate}€</strong></small></p>
+          <div className="header__top">
+            <h1>Schocoronia</h1>
+            <div className="header__nav">
+              <img className="header__nav__icon" src={infoIcon} alt="Wichtige Hinweise" onClick={e => toggleInfoModal()}/>
+              <img className="header__nav__icon" src={settingsIcon} alt="settings" onClick={e => toggleSettingsModal()}/>
+            </div>
+          </div>
+          <div className="header__bottom">
+            <p><small>Hälfte: { game.half !== 3 ? game.half : 'Loser-Round' } // Verbleibende Batches: {game.batches} // Spendenrate: {game.donationRate}€</small></p>
+          </div>
       </header>
+
       <main className="board" style={{backgroundImage:  `url(${bg})`}}>
         <Players players={players} batches={game.batches} updatePlayerDices={updatePlayerDices} deletePlayer={deletePlayer} addBatch={addBatch} removeBatch={removeBatch} />
         <div className="board__buttons">
-          <button className={"button" + (game.batches !== 0 ? '' : ' disable')} onClick={resetRound}>Runde neu Starten</button>
+          <button className={"button" + (game.isHalfDone ? ' disable' : '')} onClick={resetRound}>Runde neu Starten</button>
           <button className={"button" + (game.isHalfDone ? '' : ' disable')} onClick={resetHalf}>
             {game.half === 1 ? '2. Hälfte Starten' : ''}
             {game.half === 2 ? 'Verlierer ausspielen' : ''}
             {game.half === 3 ? 'Neues Spiel' : ''}
           </button>
-
-          {/* <button className="button" onClick={resetGame}>Alles Zurücksetzen</button> */}
         </div>
       </main>
+
       <Footer modalIsOpen={infoModal} toggleInfoModal={toggleInfoModal}/>
       <Information modalIsOpen={infoModal} toggleInfoModal={toggleInfoModal}/>
-      <Settings modalIsOpen={settingsModal} toggleSettingsModal={toggleSettingsModal} resetGame={resetGame} donationRate={game.donationRate} changeDonationRate={changeDonationRate}/>
+      <Settings modalIsOpen={settingsModal} addPlayer={addPlayer} toggleSettingsModal={toggleSettingsModal} resetGame={resetGame} donationRate={game.donationRate} changeDonationRate={changeDonationRate}/>
     </div>
   );
 }

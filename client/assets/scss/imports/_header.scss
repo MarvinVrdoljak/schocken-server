@@ -1,11 +1,26 @@
 .header {
-  background-color: rgba($black, 1);
-  padding: rem-calc(15 20 20);
-  color: $white;
+  background-color: $brown;
 
-  &__info{
-    height: rem-calc(24);
-    width: rem-calc(24);
-    margin-left: rem-calc(5);
+  &__top{
+    color: $white;
+    padding: rem-calc(10);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__bottom{
+    padding: rem-calc(5 10);
+    background-color: $beige;
+  }
+
+  &__nav{
+    line-height: 1;
+
+    &__icon{
+      height: rem-calc(20);
+      width: rem-calc(20);
+      margin-right: rem-calc(8);
+    }
   }
 }

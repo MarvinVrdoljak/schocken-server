@@ -32,6 +32,8 @@ select {
     margin-right: 10px;
     margin-bottom: rem-calc(5);
     max-height: rem-calc(40);
+    border: 2px solid $gray;
+    margin-bottom: rem-calc(10);
 }
 
 textarea{
@@ -39,7 +41,7 @@ textarea{
 }
 
 ::placeholder {
-    color: $black;
+    color: $gray;
   }
 
 

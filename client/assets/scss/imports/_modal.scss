@@ -40,11 +40,15 @@
     right: rem-calc(-15);
     height: rem-calc(30);
     width: rem-calc(30);
-    background-color: $red;
+    background-color: $gray;
 
     img {
       height: rem-calc(10);
       width: rem-calc(10);
+    }
+
+    &:hover{
+      background-color: $green;
     }
   }
 
