@@ -1,9 +1,9 @@
 .player{
-    margin-bottom: rem-calc(15);
+    margin-bottom: rem-calc(10);
     position: relative;
     background-color: rgba($white, 0.5);
     border-radius: 5px;
-    padding: rem-calc(15 20 20);
+    padding: rem-calc(10);
     border: 1px solid rgba($black, 0.25);
 
     &__name{

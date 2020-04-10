@@ -45,33 +45,40 @@ function App() {
     setSettingsModal(!settingsModal);
   }
 
-   function updatePlayerDices(id, dices, addRound){
-     const updatedPlayers = players.map(player => {
-         if (player.id === id) {
-           player.dices = dices;
-           if(addRound){
-             player.round =  player.round + 1;
-            }
-          }
-          return player;
-        })
+  function updatePlayerDices(id, rolled, dices, addRound) {
+    const updatedPlayers = players.map(player => {
+      if (player.id === id) {
+        player.dices = dices;
+        player.rolled = rolled;
+        if (addRound) {
+          player.round = player.round + 1;
+        }
+      }
+      return player;
+    })
 
-      updateAll(updatedPlayers, game);
-  }
-
-  function deletePlayer(id) {
-    const updatedPlayers = [...players.filter(player => player.id !== id)];
-    // socket.emit("update", {players});
     updateAll(updatedPlayers, game);
   }
 
+  function deletePlayer(id) {
+    if (window.confirm('Hat da jemand die Nase voll? Wenn du den Spieler löscht, werden dessen Batches zurück auf den Stapel gepackt.')) {
+      const getPlayerBatches = [...players.filter(player => player.id === id)][0].batch;
+      const updatedGame = { ...game, batches: game.batches + getPlayerBatches };
+      const updatedPlayers = [...players.filter(player => player.id !== id)];
+      updateAll(updatedPlayers, updatedGame);
+    }
+  }
+
   function addPlayer(name) {
-    const updatedPlayers = ([...players, {id: game.playerId, name, round: 0, batch: 0, donation: 0, loses: 0, dices: [
-      {id: 1, value: 1, selected: false, visible: true},
-      {id: 2, value: 2, selected: false, visible: true},
-      {id: 3, value: 3, selected: false, visible: true},
-    ]}]);
-    const updatedGame = {...game, playerId: players.length + 1};
+    const updatedPlayers = ([...players, {
+      id: game.playerId, name, round: 0, batch: 0, donation: 0, loses: 0, rolled: false, dices: [
+        { id: 1, value: 1, selected: false, visible: true },
+        { id: 2, value: 2, selected: false, visible: true },
+        { id: 3, value: 3, selected: false, visible: true },
+      ]
+    }]);
+    const updatedGame = { ...game, playerId: players.length + 1 };
+
     updateAll(updatedPlayers, updatedGame);
   }
 
@@ -165,6 +172,7 @@ function App() {
     // updatedGame = {...game, setIsHalfDone: false, batches: 13, half: 1};
     updateAll(updatedPlayers, updatedGame);
   }
+
 
   function resetGame(){
     if (window.confirm('Bist du sicher, dass du alle Daten zurück setzen willst? Alle Spieler werden rausgeworfen, alle Daten auf 0 gesetzt.')){

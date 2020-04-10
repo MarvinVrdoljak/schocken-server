@@ -11,11 +11,7 @@ body {
   margin: 0;
 
   @include breakpoint(768px, up) {
-    font-size: 18px;
-  }
-
-  @include breakpoint(1024px, up) {
-      font-size: 20px;
+    font-size: 16px;
   }
 }
 
